@@ -1,0 +1,16 @@
+/build*/
+
+# Исходники подпроектов скачивает Meson, в репозитории только .wrap
+/subprojects/*
+!/subprojects/*.wrap
+
+# PNG-дампы lab
+/out/
+
+/.idea/
+/.vscode/
+/.cache/
+__pycache__/
+
+# Раскладка окон ImGui, у каждого своя
+imgui.ini
