@@ -5,13 +5,10 @@ project('genesis', 'cpp',
 
 cpp = meson.get_compiler('cpp')
 
-# Флаги детерминизма нужны всем целям, а не только ядру: inline-код из core/include
-# компилируется с флагами той цели, которая его включает
-if cpp.get_argument_syntax() == 'msvc'
-  add_project_arguments('/fp:precise', language : 'cpp')
-else
-  add_project_arguments('-ffp-contract=off', '-fno-fast-math', language : 'cpp')
+if cpp.get_argument_syntax() != 'gcc'
+  error('Needs GCC or Clang: the determinism flags are specified in their syntax.')
 endif
+add_project_arguments('-ffp-contract=off', '-fno-fast-math', language : 'cpp')
 
 core_inc = include_directories('core/include')
 # is_system: предупреждения из чужих заголовков не смешиваются с нашими
